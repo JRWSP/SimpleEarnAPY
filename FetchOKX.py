@@ -4,8 +4,8 @@ from config_secrets import OKX_API_KEY, OKX_API_PASSPHRASE, OKX_API_SECRET
 
 ###Sequential version
 class OKX(CEX):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, assets = None):
+        super().__init__(assets)
         self.api_key:str = OKX_API_KEY
         self.api_secret:str = OKX_API_SECRET
         self.api_passphrase = OKX_API_PASSPHRASE

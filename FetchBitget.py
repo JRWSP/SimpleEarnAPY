@@ -19,8 +19,8 @@ import bitget.bitget_api as baseApi
 from bitget.exceptions import BitgetAPIException
 
 class Bitget(CEX):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, assets = None):
+        super().__init__(assets)
         self.api_key:str = BITGET_API_KEY
         self.api_secret:str = BITGET_API_SECRET
         self.api_passphrase = BITGET_API_PASSPHRASE

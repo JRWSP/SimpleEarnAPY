@@ -8,8 +8,8 @@ from config_secrets import KUCOIN_API_KEY, KUCOIN_API_SECRET, KUCOIN_API_PASSPHR
 from kucoin_universal_sdk.generate.earn.earn.model_get_staking_products_req import GetStakingProductsReq
 
 class Kucoin(CEX):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, assets = None):
+        super().__init__(assets)
         self.api_key = KUCOIN_API_KEY
         self.api_secret = KUCOIN_API_SECRET
         self.api_passphrase = KUCOIN_API_PASSPHRASE

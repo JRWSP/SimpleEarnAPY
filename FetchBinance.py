@@ -5,8 +5,8 @@ from config_secrets import BINANCE_API_KEY, BINANCE_API_SECRET
 from typing import Dict
 
 class Binance(CEX):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, assets = None):
+        super().__init__(assets)
         self.api_key:str = BINANCE_API_KEY
         self.api_secret:str = BINANCE_API_SECRET
         self.client = Client(self.api_key, self.api_secret)
@@ -54,13 +54,10 @@ class Binance(CEX):
         formatRate.append({"amt": '', 
                                'rate': f"{baseRate*100:.1f}%" })
         return {asset: formatRate}
-        """
-        {'USDC': {'latestAnnualPercentageRate': 0.03940039,
-          'tierAnnualPercentageRate': {'0-500USDC': 0.09}}}
-
-        """
 
 class AsyncBinance(Binance):
+    """Async Client is no longer used.
+    """
     def __init__(self):
         super().__init__()
     

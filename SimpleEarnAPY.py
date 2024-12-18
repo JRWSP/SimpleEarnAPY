@@ -1,42 +1,45 @@
-from pprint import pprint
 from config_secrets import *
 from FetchBitget import Bitget
 from FetchOKX import OKX
 from FetchKucoin import Kucoin
-from FetchBinance import AsyncBinance, Binance
-if __name__=="__main__":
+from FetchBinance import Binance
+from concurrent.futures import ThreadPoolExecutor
+import pandas as pd
+import time 
+
+def fetch_and_return_rates(ExchangeClass: classmethod, assets: str|list) -> tuple[str,dict]:
+    exchange = ExchangeClass(assets=assets)
+    exchange.getSimpleEarnRates()
+    return (ExchangeClass.__name__ , exchange.SimpleEarnRates)
+
+def formatDataFrame(cex:str, EarnRates:dict) -> pd.DataFrame:
+    ratesDF = None
+    for coin, rates in EarnRates.items():
+        df = pd.DataFrame.from_dict(rates)
+        df['coin'] = [coin]*len(df)
+        df['cex'] = [cex]*len(df)
+        df = df[['cex','coin','rate','amt']]
+        ratesDF = pd.concat([ratesDF, df], ignore_index=True)
+    return ratesDF
+
+def main():
     assets = ['USDC','USDT']
-    print("Binance")
-    if len(assets) > 2:
-#        import nest_asyncio
-#        nest_asyncio.apply()
-        import asyncio
+    exchanges = [
+        Binance,
+        Bitget,
+        OKX,
+        Kucoin
+    ]
+    with ThreadPoolExecutor() as executor:
+        futures = [executor.submit(fetch_and_return_rates, cls, assets) for cls in exchanges]    
+    results = [future.result() for future in futures]
 
-        binance = AsyncBinance()
-        binance.addAssets(assets)
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(binance.getSimpleEarnRates())
-    else:
-        binance = Binance()
-        binance.addAssets(assets)
-        binance.getSimpleEarnRates()
+    rateDataFrame = [formatDataFrame(cex, result) for (cex, result) in results]
+    rateDataFrame = pd.concat(rateDataFrame, ignore_index=True)
+    return rateDataFrame.to_string(index=False)
 
-    pprint(binance.SimpleEarnRates)
-
-    print("Bitget")
-    bitget = Bitget()
-    bitget.addAssets(assets)
-    bitget.getSimpleEarnRates()
-    pprint(bitget.SimpleEarnRates)
-
-    print("OKX")
-    okx = OKX()
-    okx.addAssets(assets)
-    okx.getSimpleEarnRates()
-    pprint(okx.SimpleEarnRates)
-
-    print("Kucoin")
-    kucoin = Kucoin()
-    kucoin.addAssets(assets=assets)
-    kucoin.getSimpleEarnRates()
-    pprint(kucoin.SimpleEarnRates)
+if __name__=="__main__":
+    start_time = time.time()
+    print(main())
+    multithreaded_duration = time.time() - start_time
+    print(f"Multithreaded execution took {multithreaded_duration:.2f} seconds.\n")
