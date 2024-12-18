@@ -2,6 +2,7 @@ from pprint import pprint
 from config_secrets import *
 from FetchBitget import Bitget
 from FetchOKX import OKX
+from FetchKucoin import Kucoin
 from FetchBinance import AsyncBinance, Binance
 if __name__=="__main__":
     assets = ['USDC','USDT']
@@ -33,3 +34,9 @@ if __name__=="__main__":
     okx.addAssets(assets)
     okx.getSimpleEarnRates()
     pprint(okx.SimpleEarnRates)
+
+    print("Kucoin")
+    kucoin = Kucoin()
+    kucoin.addAssets(assets=assets)
+    kucoin.getSimpleEarnRates()
+    pprint(kucoin.SimpleEarnRates)

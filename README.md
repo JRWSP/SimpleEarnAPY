@@ -13,17 +13,18 @@ For those who are risk-taker, there are plenty [defi protocols](https://defillam
 ### Supported stablecoin
 USDC, USDT
 ### Supported CEX
-Binance, OKX, Bitget
+Binance, OKX, Bitget, Kucoin
 
 ## To-do
 Some CEX does not provide API for their flexible earn product. I will add them once their API is available.
 
-[ ] Add HTX, Kucion, Gate-io
+[ ] Add HTX, Gate-io
 
 ## Required Pacakge
 - python-binance
 - python-okx
 - bitget sdk (check comments in FetchBitget.py)
+- kucoin-universal-sdk
 - ~~pybit~~ No earning rate API available.
 
 ## Setup
