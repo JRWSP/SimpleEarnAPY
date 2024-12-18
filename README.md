@@ -11,8 +11,10 @@ Note that simple earns is not the same as bank's saving account and stablecoins 
 For those who are risk-taker, there are plenty [defi protocols](https://defillama.com/yields/stablecoins) outside CEX that let you earn yields on stablecoins. Many of them offer higher rates than CEXs but also sports higher risks, please DYOR.
 
 ### Supported stablecoin
-- USDC
-- USDT
+USDC, USDT
+### Supported CEX
+Binance, OKX, Bitget
+
 ## To-do
 Some CEX does not provide API for their flexible earn product. I will add them once their API is available.
 
