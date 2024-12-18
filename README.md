@@ -15,10 +15,13 @@ USDC, USDT
 ### Supported CEX
 Binance, OKX, Bitget, Kucoin
 
-## To-do
+
+### Unsupported CEX
 Some CEX does not provide API for their flexible earn product. I will add them once their API is available.
 
-[ ] Add HTX, Gate-io
+HTX, Bybit, Crypto.com, Coinbase, Gate-io
+
+## To-do
 
 ## Required Pacakge
 - python-binance
