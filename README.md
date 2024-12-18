@@ -1,6 +1,10 @@
 # Crypto Simple Earn APR/APY Across CEX.
+If you find my project helpful, you can donate me for a cup of coffee, or some beers so I can code more :) <br>
+
+<a href="https://www.buymeacoffee.com/jrwsp" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 108px !important;" ></a> <br>
+BTC: bc1q2zpmmlz7ujwx2ghsgw5j7umv8wmpchplemvhtu <br>
+ETH: 0x80e98FcfED62970e35a57d2F1fefed7C89d5DaF4
 ![prototype version](figure/screenshot%202024-12-18%20011435.png)
--Prototype version on Terminal-
 
 The purpose of this repo is to provide a simple way to monitor the flexible earn yield across well-known CEX.
 
@@ -28,11 +32,39 @@ HTX, Bybit, Crypto.com, Coinbase, Gate-io
 - python-okx
 - bitget sdk (check comments in FetchBitget.py)
 - kucoin-universal-sdk
-- ~~pybit~~ No earning rate API available.
+- pandas
 
-## Setup
-1. Getting APIs from CEXs.
+## How to use
+1. Download or clone this repo.
+2. Install the required packages by go to your downloaded folder and run
+```sh
+pip install -r requirements.txt
+``` 
+3. Getting APIs from CEXs. Create `config_secrets.py` file to store your API keys. These keys are very important, always keep it safe from the others. The file should looks like this:
+```python
+# Binance API credentials
+BINANCE_API_KEY = 'xxx'
+BINANCE_API_SECRET = 'xxx'
 
+#OKX API credentials
+OKX_API_KEY = 'xxx'
+OKX_API_SECRET = 'xxx'
+OKX_API_PASSPHRASE = 'xxx'
+
+#Bitget API credentials
+BITGET_API_KEY = 'xxx'
+BITGET_API_SECRET = 'xxx'
+BITGET_API_PASSPHRASE = 'xxx'
+
+#Kucoin API credentials
+KUCOIN_API_KEY = 'xxx'
+KUCOIN_API_SECRET = 'xxx'
+KUCOIN_API_PASSPHRASE = 'xxx'
+```
+4. Finally, run:
+```sh
+python SimpleEarnAPY.py
+```
 ## Security Concern
 
 Binance API requires enabling trading permission. This is very risky. If possible, set API with specific ip allowance.

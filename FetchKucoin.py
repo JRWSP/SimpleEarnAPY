@@ -4,7 +4,6 @@ from kucoin_universal_sdk.api.client import DefaultClient
 from kucoin_universal_sdk.model.client_option import ClientOptionBuilder
 from kucoin_universal_sdk.model.constants import GLOBAL_API_ENDPOINT
 from kucoin_universal_sdk.model.transport_option import TransportOptionBuilder
-from config_secrets import KUCOIN_API_KEY, KUCOIN_API_SECRET, KUCOIN_API_PASSPHRASE
 from kucoin_universal_sdk.generate.earn.earn.model_get_staking_products_req import GetStakingProductsReq
 
 class Kucoin(CEX):

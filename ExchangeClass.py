@@ -1,5 +1,4 @@
 from typing import List
-import pandas as pd
 class CEX:
     def __init__(self, assets:str|List[str]=None):
         self.api_key:str = None

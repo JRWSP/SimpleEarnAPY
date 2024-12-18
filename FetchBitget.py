@@ -1,10 +1,10 @@
 """
+If you clone this project directly from my Github repo, the 'bitget' is already included and the step below is unnecessary.
+
 Bitget does not provide sdk though pip channel. 
 You need to download it from their github repo (https://github.com/BitgetLimited/v3-bitget-api-sdk/tree/master/bitget-python-sdk-api) 
 and put the folder 'bitget' from v3-bitget-api-sdk/bitget-python-sdk-api to your local directory.
-"""
 
-"""
 Parameter	Type	Required	Description
 coin	    String	No	Coin eg： BTC
 filter	    String	No	Filter conditions
