@@ -45,12 +45,13 @@ class Binance(CEX):
     
     def _formatRate(self, rate:dict) -> dict:
         asset = [*rate][0]
-        tier = rate[asset]['tierAnnualPercentageRate']
-        baseRate = rate[asset]['latestAnnualPercentageRate']
+        rate = rate[asset]
+        baseRate = rate['latestAnnualPercentageRate']
         formatRate = []
-        for amt, tierRate in tier.items():
-            formatRate.append({"amt": amt, 
-                               'rate': f"{(baseRate+tierRate)*100:.1f}%" })
+        if 'tierAnnualPercentageRate' in rate.keys():
+            for amt, tierRate in rate['tierAnnualPercentageRate'].items():
+                formatRate.append({"amt": amt, 
+                                'rate': f"{(baseRate+tierRate)*100:.1f}%" })
         formatRate.append({"amt": '', 
                                'rate': f"{baseRate*100:.1f}%" })
         return {asset: formatRate}
