@@ -17,13 +17,13 @@ For those who are risk-taker, there are plenty [defi protocols](https://defillam
 ### Supported stablecoin
 USDC, USDT
 ### Supported CEX
-Binance, OKX, Bitget, Kucoin
+Binance, OKX, Bitget, Kucoin, Bybit
 
 
 ### Unsupported CEX
 Some CEX does not provide API for their flexible earn product. I will add them once their API is available.
 
-HTX, Bybit, Crypto.com, Coinbase, Gate-io
+HTX, Crypto.com, Coinbase, Gate-io
 
 ## To-do
 
@@ -67,6 +67,7 @@ python SimpleEarnAPY.py
 ```
 ## Security Concern
 
-Binance API requires enabling trading permission. This is very risky. If possible, set API with specific ip allowance.
+- Bybit fetching uses selenium, which is very less efficient than the API metohd. If you do not care about this exchange, turn it off will make program run much faster. This can be done by remove `Bybit` from `exchange` variable in the main file.
+- Binance API requires enabling trading permission. This is very risky. If possible, set API with specific ip allowance.
 
 
