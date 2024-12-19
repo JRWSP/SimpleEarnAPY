@@ -21,4 +21,9 @@ class CEX:
         pass
 
     def _formatRate(self) -> dict:
+        """
+        Need all data in format of 
+        {asset: [{'amt':amt, 'rate':rate},
+                {'amt':'', 'rate':rate}]}
+        """
         pass

@@ -1,4 +1,5 @@
 from config_secrets import *
+from FetchBybit import Bybit
 from FetchBitget import Bitget
 from FetchOKX import OKX
 from FetchKucoin import Kucoin
@@ -10,6 +11,7 @@ import time
 def fetch_and_return_rates(ExchangeClass: classmethod, assets: str|list) -> tuple[str,dict]:
     exchange = ExchangeClass(assets=assets)
     exchange.getSimpleEarnRates()
+    print(f"Finish fetching {ExchangeClass.__name__}")
     return (ExchangeClass.__name__ , exchange.SimpleEarnRates)
 
 def formatDataFrame(cex:str, EarnRates:dict) -> pd.DataFrame:
@@ -28,7 +30,8 @@ def main():
         Binance,
         Bitget,
         OKX,
-        Kucoin
+        Kucoin,
+        Bybit
     ]
     with ThreadPoolExecutor() as executor:
         futures = [executor.submit(fetch_and_return_rates, cls, assets) for cls in exchanges]    
