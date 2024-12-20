@@ -19,7 +19,7 @@ def formatDataFrame(cex:str, EarnRates:dict) -> pd.DataFrame:
     for coin, rates in EarnRates.items():
         df = pd.DataFrame.from_dict(rates)
         df['coin'] = [coin]*len(df)
-        df['cex'] = [cex]*len(df)
+        df['cex'] = [cex] + ['']*(len(df)-1)
         df = df[['cex','coin','rate','amt']]
         ratesDF = pd.concat([ratesDF, df], ignore_index=True)
     return ratesDF
