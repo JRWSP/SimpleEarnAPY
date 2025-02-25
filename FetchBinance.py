@@ -49,7 +49,7 @@ class Binance(CEX):
         baseRate = rate['latestAnnualPercentageRate']
         formatRate = []
         if 'tierAnnualPercentageRate' in rate.keys():
-            for amt, tierRate in rate['tierAnnualPercentageRate'].items():
+            for amt, tierRate in reversed( rate['tierAnnualPercentageRate'].items() ): #Use reversed to show in a correct order.
                 formatRate.append({"amt": amt, 
                                 'rate': f"{(baseRate+tierRate)*100:.1f}%" })
         formatRate.append({"amt": '', 

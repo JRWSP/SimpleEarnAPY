@@ -31,8 +31,8 @@ def main():
         Bitget,
         OKX,
         Kucoin,
-        Bybit
     ]
+    #exchanges += [Bybit] #Uncomment this if you want to include Bybit. Disabled by default due to its inefficient implementation.
     with ThreadPoolExecutor() as executor:
         futures = [executor.submit(fetch_and_return_rates, cls, assets) for cls in exchanges]    
     results = [future.result() for future in futures]
