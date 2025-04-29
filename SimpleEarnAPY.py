@@ -7,7 +7,6 @@ from FetchBinance import Binance
 from concurrent.futures import ThreadPoolExecutor
 import pandas as pd
 import time 
-from lblprof import start_tracing, stop_tracing, show_interactive_tree, show_tree
 
 def fetch_and_return_rates(ExchangeClass: classmethod, assets: str|list) -> tuple[str,dict]:
     exchange = ExchangeClass(assets=assets)
@@ -26,16 +25,21 @@ def formatDataFrame(cex:str, EarnRates:dict) -> pd.DataFrame:
     return ratesDF
 
 def main():
-    assets = ['USDC','USDT']
-    exchanges = [
-        Binance,
-        Bitget,
-        OKX,
-        Kucoin,
-    ]
-    #exchanges += [Bybit] #Uncomment this if you want to include Bybit. Disabled by default due to its inefficient implementation.
+    # Specify assets for each exchange
+    exchange_assets = {
+        Binance: ['USDC', 'USDT', 'FDUSD'],
+        Bitget: ['USDC', 'USDT'],
+        OKX: ['USDC', 'USDT'],
+        Kucoin: ['USDC', 'USDT'],
+        # Bybit: ['XRP', 'LTC'], #Uncomment this if you want to include Bybit. 
+                                    # Disabled by default due to its poorly implementation.
+    }
     with ThreadPoolExecutor() as executor:
-        futures = [executor.submit(fetch_and_return_rates, cls, assets) for cls in exchanges]    
+        futures = [
+            executor.submit(fetch_and_return_rates, exchange, assets)
+            for exchange, assets in exchange_assets.items()
+        ]
+        #futures = [executor.submit(fetch_and_return_rates, cls, assets) for cls in exchanges]    
     results = [future.result() for future in futures]
 
     rateDataFrame = [formatDataFrame(cex, result) for (cex, result) in results]
