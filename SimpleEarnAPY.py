@@ -7,6 +7,7 @@ from FetchBinance import Binance
 from concurrent.futures import ThreadPoolExecutor
 import pandas as pd
 import time 
+from lblprof import start_tracing, stop_tracing, show_interactive_tree, show_tree
 
 def fetch_and_return_rates(ExchangeClass: classmethod, assets: str|list) -> tuple[str,dict]:
     exchange = ExchangeClass(assets=assets)
