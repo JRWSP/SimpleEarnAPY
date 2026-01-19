@@ -37,3 +37,8 @@ class OKX(CEX):
                 except Exception as e:
                     print(e)
                     continue
+
+if __name__=="__main__":
+    from pprint import pprint
+    okx = OKX()
+    pprint(okx.simpleEarn(asset='USDC'))

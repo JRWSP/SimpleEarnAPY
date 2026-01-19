@@ -32,7 +32,11 @@ class Binance(CEX):
         return rate_data
     
     def simpleEarn(self, asset:str) -> dict:
-        return self.client.get_simple_earn_flexible_product_list(asset=asset)
+        try:
+            result = self.client.get_simple_earn_flexible_product_list(asset=asset)
+            return result 
+        except Exception as e:
+            return 
 
     def getSimpleEarnRates(self) -> Dict:
         if self.assets is None:

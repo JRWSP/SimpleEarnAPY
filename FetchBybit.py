@@ -10,8 +10,34 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import time
+from pybit.unified_trading import HTTP
+from warnings import deprecated
+from pprint import pprint
 
+class BybitV5(CEX):
+    def __init__(self, assets = None):
+        #No api key needed for earn info.
+        super().__init__(assets)
+        #self.endpoint = "/v5/asset/interest-rate"
+        #self.baseApi = baseApi.BybitApi(self.api_key, self.api_secret)
+    
+    def simpleEarn(self, asset:str) -> list:
+        try:
+            response = self.baseApi.get(self.endpoint, params={"coin":asset})
+            return response['result']['data']
+        except BitgetAPIException as e:
+            print("error:" + e.message)
+
+if __name__=="__main__":
+
+    session = HTTP(
+        testnet=False,
+    )
+    pprint(session.get_earn_product_info(
+        category="FlexibleSaving",
+        coin="USDC",
+    ))
+@deprecated("Please use BybitV5 instead.")
 class Bybit(CEX):
     def __init__(self, assets = None):
         super().__init__(assets)
